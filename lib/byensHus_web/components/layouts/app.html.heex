@@ -4,7 +4,7 @@
   </.link>
   <button type="button" id="nav-button" class="mr-4 lg:hidden">MENU</button>
   
-  <nav id="navbar" class="absolute top-0 right-0 bottom-0 w-full bg-neutral-400 translate-x-full transform duration-300 transition-transform ease-out overflow-y-hidden z-10 lg:translate-x-0 lg:relative">
+  <nav id="navbar" class="absolute top-0 -right-full bottom-0 w-full bg-neutral-400 transform duration-300 transition-transform ease-out overflow-y-hidden z-10 lg:translate-x-0 lg:relative">
       <div class="flex flex-col items-center h-full gap-10 lg:flex-row">
         <h2 class="lg:hidden font-bold text-2xl mt-8">Menu</h2>
         <button type="button" id="closeNav" class="absolute top-4 right-4 lg:hidden">close</button>
@@ -51,7 +51,7 @@
           Log in
         </.link>
         <.link
-          href={~p"/signup"}
+          href={~p"/users/register"}
           class="bg-neutral-600 px-4 py-1 rounded-lg"
 
         >

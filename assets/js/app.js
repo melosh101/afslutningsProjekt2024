@@ -49,10 +49,10 @@ const navOpen = false;
 
 navButton.addEventListener("click", () => {
     const nav = document.getElementById("navbar")
-    nav.classList.remove("translate-x-full")
+    nav.classList.add("-translate-x-full")
 })
 
 document.getElementById("closeNav").addEventListener("click", () => {
     const nav = document.getElementById("navbar")
-    nav.classList.add("translate-x-full")
+    nav.classList.remove("-translate-x-full")
 })
