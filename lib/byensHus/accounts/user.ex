@@ -1,6 +1,7 @@
 defmodule ByensHus.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
+  import Bitwise
 
   schema "users" do
     field :email, :string
@@ -9,6 +10,7 @@ defmodule ByensHus.Accounts.User do
     field :current_password, :string, virtual: true, redact: true
     field :confirmed_at, :utc_datetime
     field :profile_picture, :string
+    field :roles, :integer, default: 1
     timestamps(type: :utc_datetime)
   end
 
@@ -155,5 +157,22 @@ defmodule ByensHus.Accounts.User do
     else
       add_error(changeset, :current_password, "is not valid")
     end
+  end
+
+  def has_role?(%ByensHus.Accounts.User{roles: roles}, role) do
+    res = case role do
+      :user -> roles &&& 1
+      :admin -> roles &&& 2
+      :event_manager -> roles &&& 4
+      _ -> IO.warn("unknown role: #{inspect(role)}")
+          0
+
+    end
+    if res > 0 do
+      true
+    else
+      false
+    end
+
   end
 end
