@@ -1,29 +1,69 @@
-<header class="px-4 sm:px-6 lg:px-8">
-  <div class="flex items-center justify-between border-b border-zinc-100 py-3 text-sm">
-    <div class="flex items-center gap-4">
-      <a href="/">
-        <img src={~p"/images/logo.svg"} width="36" />
-      </a>
-      <p class="bg-brand/5 text-brand rounded-full px-2 font-medium leading-6">
-        v{Application.spec(:phoenix, :vsn)}
-      </p>
-    </div>
-    <div class="flex items-center gap-4 font-semibold leading-6 text-zinc-900">
-      <a href="https://twitter.com/elixirphoenix" class="hover:text-zinc-700">
-        @elixirphoenix
-      </a>
-      <a href="https://github.com/phoenixframework/phoenix" class="hover:text-zinc-700">
-        GitHub
-      </a>
-      <a
-        href="https://hexdocs.pm/phoenix/overview.html"
-        class="rounded-lg bg-zinc-100 px-2 py-1 hover:bg-zinc-200/80"
+<header class="w-full bg-neutral-400 flex justify-between">
+  <.link>
+    <img src={~p"/images/logo.svg"} alt="ByensHus" class="h-12" />
+  </.link>
+  <button type="button" id="nav-button" class="mr-4 lg:hidden">MENU</button>
+  
+  <nav id="navbar" class="absolute top-0 right-0 bottom-0 w-full bg-neutral-400 translate-x-full transform duration-300 transition-transform ease-out overflow-y-hidden z-10 lg:translate-x-0 lg:relative">
+      <div class="flex flex-col items-center h-full gap-10 lg:flex-row">
+        <h2 class="lg:hidden font-bold text-2xl mt-8">Menu</h2>
+        <button type="button" id="closeNav" class="absolute top-4 right-4 lg:hidden">close</button>
+      <.link
+        href={~p"/"}
+        class="text-2xl lg:hidden"
       >
-        Get Started <span aria-hidden="true">&rarr;</span>
-      </a>
+        Home
+      </.link>
+      <.link
+        href={~p"/"}
+        class="text-2xl"
+      >
+        Events
+      </.link>
+      <.link
+        href={~p"/"}
+        class="text-2xl"
+
+      >
+        Booking
+      </.link>
+      <%= if @current_user do %>
+        <.link
+          href={~p"/users/settings"}
+          class="flex flex-row gap-4"
+        >
+          <img src={@current_user.profile_picture || "https://picsum.photos/48/48"} alt="" class="rounded-full h-12 w-12" />
+          <p class="my-auto">{@current_user.email}</p>
+        </.link>
+
+        <.link
+          href={~p"/users/log_out"}
+          class="bg-neutral-600 px-4 py-1 rounded-lg"
+        >
+        Log ud
+        </.link>
+      <% else %>
+        <div class="text-xl flex flex-row gap-4 ">
+        <.link
+          href={~p"/users/log_in"}
+          class="bg-neutral-600 px-4 py-1 rounded-lg"
+        >
+          Log in
+        </.link>
+        <.link
+          href={~p"/signup"}
+          class="bg-neutral-600 px-4 py-1 rounded-lg"
+
+        >
+          Sign up
+        </.link>
+        </div>
+      <% end %>
     </div>
-  </div>
+
+  </nav>
 </header>
+
 <main class="px-4 py-20 sm:px-6 lg:px-8">
   <div class="mx-auto max-w-2xl">
     <.flash_group flash={@flash} />
