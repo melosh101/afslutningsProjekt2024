@@ -23,12 +23,6 @@ config :byens_hus, ByensHusWeb.Endpoint,
   secret_key_base: "BPEvdpIz8DaaP0YqZvXajTFNvuWB+3uBqfWe0SBfKdFZAj5CjbTWWVTrXohdFE2/",
   server: false
 
-# In test we don't send emails
-config :byens_hus, ByensHus.Mailer, adapter: Swoosh.Adapters.Test
-
-# Disable swoosh api client as it is only required for production adapters
-config :swoosh, :api_client, false
-
 # Print only warnings and errors during test
 config :logger, level: :warning
 
