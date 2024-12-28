@@ -1,4 +1,4 @@
-providers = []
+providers = ["elixir"]
 buildImage = 'ghcr.io/railwayapp/nixpacks:ubuntu-1733184274'
 
 [variables]
@@ -26,9 +26,7 @@ nixPkgs = [
     'elixir_1_14',
     'gcc',
 ]
-nixLibs = ['stdenv.cc.cc.lib']
 nixOverlays = []
-nixpkgsArchive = 'c5702bd28cbde41a191a9c2a00501f18941efbd0'
 
 [start]
 cmd = 'mix phx.server'
