@@ -1,1 +1,1 @@
-call "%~dp0\byensHus" eval ByensHus.Release.migrate
+call "%~dp0\byens_hus" eval ByensHus.Release.migrate

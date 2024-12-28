@@ -76,10 +76,10 @@ defmodule ByensHus.MixProject do
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
-      "assets.build": ["tailwind byensHus", "esbuild byensHus"],
+      "assets.build": ["tailwind byensHus", "esbuild byens_hus"],
       "assets.deploy": [
-        "tailwind byensHus --minify",
-        "esbuild byensHus --minify",
+        "tailwind byens_hus --minify",
+        "esbuild byens_hus --minify",
         "phx.digest"
       ]
     ]

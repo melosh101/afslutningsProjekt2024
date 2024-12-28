@@ -10,7 +10,7 @@ defmodule ByensHus.Application do
     children = [
       ByensHusWeb.Telemetry,
       ByensHus.Repo,
-      {DNSCluster, query: Application.get_env(:byensHus, :dns_cluster_query) || :ignore},
+      {DNSCluster, query: Application.get_env(:byens_hus, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: ByensHus.PubSub},
       # Start the Finch HTTP client for sending emails
       {Finch, name: ByensHus.Finch},

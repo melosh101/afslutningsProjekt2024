@@ -1,5 +1,5 @@
 defmodule ByensHusWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :byensHus
+  use Phoenix.Endpoint, otp_app: :byens_hus
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
@@ -21,7 +21,7 @@ defmodule ByensHusWeb.Endpoint do
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/",
-    from: :byensHus,
+    from: :byens_hus,
     gzip: false,
     only: ByensHusWeb.static_paths()
 
@@ -31,7 +31,7 @@ defmodule ByensHusWeb.Endpoint do
     socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
     plug Phoenix.LiveReloader
     plug Phoenix.CodeReloader
-    plug Phoenix.Ecto.CheckRepoStatus, otp_app: :byensHus
+    plug Phoenix.Ecto.CheckRepoStatus, otp_app: :byens_hus
   end
 
   plug Phoenix.LiveDashboard.RequestLogger,

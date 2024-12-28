@@ -110,6 +110,10 @@ defmodule ByensHusWeb.UserAuth do
     end
   end
 
+  def user_is_admin(conn) do
+    conn.assigns.current_user && ByensHus.Accounts.User.has_role?(conn.assigns.current_user, :admin)
+  end
+
   @doc """
   Handles mounting and authenticating the current_user in LiveViews.
 

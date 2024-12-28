@@ -1,3 +1,3 @@
 defmodule ByensHus.Mailer do
-  use Swoosh.Mailer, otp_app: :byensHus
+  use Swoosh.Mailer, otp_app: :byens_hus
 end

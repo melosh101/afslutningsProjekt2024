@@ -3,7 +3,7 @@ defmodule ByensHus.Release do
   Used for executing DB release tasks when run in production without Mix
   installed.
   """
-  @app :byensHus
+  @app :byens_hus
 
   def migrate do
     load_app()
