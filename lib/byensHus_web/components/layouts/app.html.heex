@@ -1,11 +1,13 @@
-<header class="w-full bg-neutral-400 flex justify-between">
-  <.link>
-    <img src={~p"/images/logo.svg"} alt="ByensHus" class="h-12" />
+<header class="lg:w-[90%] lg:h-16 flex justify-between mx-auto lg:border-b-2 lg:border-x-2 lg:border-black lg:rounded-b-lg lg:shadow-md lg:shadow-neutral-300">
+  <.link
+    class="lg:content-center"
+  >
+    <img src={~p"/images/bh_logo_sort.png"} alt="ByensHus" class="h-12" />
   </.link>
   <button type="button" id="nav-button" class="mr-4 lg:hidden">MENU</button>
   
-  <nav id="navbar" class="absolute top-0 -right-full bottom-0 w-full bg-neutral-400 transform duration-300 transition-transform ease-out overflow-y-hidden z-10 lg:translate-x-0 lg:relative">
-      <div class="flex flex-col items-center h-full gap-10 lg:flex-row">
+  <nav id="navbar" class="absolute top-0 -right-full bottom-0 w-full  transform duration-300 transition-transform ease-out overflow-y-hidden z-10 lg:z-0 lg:relative lg:right-8 lg:flex lg:w-auto">
+      <div class="flex flex-col items-center h-full gap-10 lg:flex-row lg:gap-8">
         <h2 class="lg:hidden font-bold text-2xl mt-8">Menu</h2>
         <button type="button" id="closeNav" class="absolute top-4 right-4 lg:hidden">close</button>
       <.link
@@ -32,27 +34,38 @@
           href={~p"/users/settings"}
           class="flex flex-row gap-4"
         >
-          <img src={@current_user.profile_picture || "https://picsum.photos/48/48"} alt="" class="rounded-full h-12 w-12" />
+          <img src={@current_user.profile_picture || "https://picsum.photos/48/48"} alt="" class="rounded-full h-12 w-12 lg:h-8 lg:w-8" />
           <p class="my-auto">{@current_user.email}</p>
         </.link>
 
         <.link
           href={~p"/users/log_out"}
-          class="bg-neutral-600 px-4 py-1 rounded-lg"
+          method="delete"
+          class="bg-neutral-300 px-4 py-1 rounded-lg lg:py-0"
         >
         Log ud
         </.link>
+        
+        <%= if ByensHus.Accounts.User.has_role?(@current_user, :admin)  do%>
+          <.link
+          href={~p"/admin/dashboard"}
+          class="bg-neutral-300 px-4 py-1 rounded-lg lg:py-0"
+        >
+        admin
+        </.link>
+        <% end %>
+
       <% else %>
         <div class="text-xl flex flex-row gap-4 ">
         <.link
           href={~p"/users/log_in"}
-          class="bg-neutral-600 px-4 py-1 rounded-lg"
+          class="bg-neutral-300 px-4 py-1 rounded-lg"
         >
           Log in
         </.link>
         <.link
           href={~p"/users/register"}
-          class="bg-neutral-600 px-4 py-1 rounded-lg"
+          class="bg-neutral-300 px-4 py-1 rounded-lg"
 
         >
           Sign up

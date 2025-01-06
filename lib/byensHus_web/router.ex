@@ -17,10 +17,26 @@ defmodule ByensHusWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :require_admin do
+    plug :browser
+    plug :require_authenticated_user
+    plug :user_is_admin
+    plug :put_layout, {ByensHusWeb.Layouts, :admin}
+  end
+
   scope "/", ByensHusWeb do
     pipe_through :browser
 
     get "/", PageController, :home
+  end
+
+  scope "/admin", ByensHusWeb do
+    pipe_through :require_admin
+
+    get "/", AdminController, :dashboard
+    get "/users", AdminController, :users
+    get "/events", AdminController, :events
+    get "/booking", AdminController, :booking
   end
 
   # Other scopes may use custom stacks.
@@ -41,7 +57,6 @@ defmodule ByensHusWeb.Router do
       pipe_through :browser
 
       live_dashboard "/dashboard", metrics: ByensHusWeb.Telemetry
-      forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
   end
 
@@ -80,6 +95,16 @@ defmodule ByensHusWeb.Router do
       on_mount: [{ByensHusWeb.UserAuth, :mount_current_user}] do
       live "/users/confirm/:token", UserConfirmationLive, :edit
       live "/users/confirm", UserConfirmationInstructionsLive, :new
+    end
+  end
+
+  def user_is_admin(conn, _params) do
+    if ByensHus.Accounts.User.has_role?(conn.assigns[:current_user], :admin) do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You are not authorized to access this page.")
+      |> redirect(to: "/")
     end
   end
 end

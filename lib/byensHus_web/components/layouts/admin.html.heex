@@ -1,0 +1,35 @@
+<div class="flex flex-row">
+<header class="w-48 border-r-2 h-screen flex flex-col items-center gap-8 first:pt-12">
+    <.link
+      href={~p"/admin"}
+      class="text-2xl"
+    >
+    Dashboard
+    </.link>
+    <.link
+        href={~p"/admin/users"}
+        class="text-2xl"
+    >
+        Brugere
+    </.link>
+    <.link
+        href={~p"/admin/events"}
+        class="text-2xl"
+    >
+        Events
+    </.link>
+    <.link
+        href={~p"/admin/booking"}
+        class="text-2xl"
+    >
+        Booking
+    </.link>
+</header>
+<main class="ml-4">
+  <div class="">
+    <.flash_group flash={@flash} />
+    {@inner_content}
+  </div>
+</main>
+
+</div>
