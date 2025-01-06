@@ -11,7 +11,7 @@ defmodule ByensHus.Accounts.User do
     field :confirmed_at, :utc_datetime
     field :profile_picture, :string
     field :roles, :integer, default: 1
-    has_many :posts, ByensHus.Accounts.Post
+    has_many :posts, ByensHus.Accounts.Posts
     many_to_many :events, ByensHus.Events.Event, join_through: ByensHus.Events.UserEvents
     timestamps(type: :utc_datetime)
   end

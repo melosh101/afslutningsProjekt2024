@@ -64,6 +64,14 @@ defmodule ByensHus.Accounts.UserToken do
     {:ok, query}
   end
 
+  def get_valid_tokens_query() do
+    query =
+      from token in UserToken,
+        where: token.inserted_at > ago(@session_validity_in_days, "day")
+
+    {:ok, query}
+  end
+
   @doc """
   Builds a token and its hash to be delivered to the user's email.
 

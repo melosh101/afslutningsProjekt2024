@@ -7,7 +7,7 @@
   <button type="button" id="nav-button" class="mr-4 lg:hidden">MENU</button>
   
   <nav id="navbar" class="absolute top-0 -right-full bottom-0 w-full  transform duration-300 transition-transform ease-out overflow-y-hidden z-10 lg:z-0 lg:relative lg:right-8 lg:flex lg:w-auto">
-      <div class="flex flex-col items-center h-full gap-10 lg:flex-row lg:gap-8">
+      <div class="flex flex-col items-center h-full gap-10 lg:flex-row lg:gap-8 bg-white">
         <h2 class="lg:hidden font-bold text-2xl mt-8">Menu</h2>
         <button type="button" id="closeNav" class="absolute top-4 right-4 lg:hidden">close</button>
       <.link
@@ -48,7 +48,7 @@
         
         <%= if ByensHus.Accounts.User.has_role?(@current_user, :admin)  do%>
           <.link
-          href={~p"/admin/dashboard"}
+          href={~p"/admin/"}
           class="bg-neutral-300 px-4 py-1 rounded-lg lg:py-0"
         >
         admin

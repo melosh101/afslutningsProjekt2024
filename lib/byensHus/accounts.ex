@@ -6,8 +6,22 @@ defmodule ByensHus.Accounts do
   import Ecto.Query, warn: false
   alias ByensHus.Repo
 
-  alias ByensHus.Accounts.{User, UserToken}
+  alias ByensHus.Accounts.{User, UserToken, Posts}
 
+
+
+  def get_user_count() do
+    length(Repo.all(User))
+  end
+
+  def get_post_count do
+    length(Repo.all(Posts))
+  end
+
+  def get_active_sessions do
+    {:ok, query} = UserToken.get_valid_tokens_query()
+    length(Repo.all(query))
+  end
   ## Database getters
 
   @doc """

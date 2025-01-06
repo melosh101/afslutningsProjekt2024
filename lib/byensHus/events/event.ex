@@ -1,6 +1,5 @@
 defmodule ByensHus.Events.Event do
   use Ecto.Schema
-  import Ecto.Changeset
 
   schema "events" do
     field :title, :string
@@ -10,8 +9,8 @@ defmodule ByensHus.Events.Event do
     field :end_time, :utc_datetime
     field :image, :string
     field :published_at, :utc_datetime
-    has_many :attendants, ByensHus.Accounts.User
-    has_many :posts, ByensHus.Accounts.Post
-    timestamps(type: :utc_datetime)
+    many_to_many :attendants, ByensHus.Accounts.User,
+      join_through: "user_events"
+    has_many :posts, ByensHus.Accounts.Posts
   end
 end
