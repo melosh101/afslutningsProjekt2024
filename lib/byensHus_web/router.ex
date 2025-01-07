@@ -57,6 +57,13 @@ defmodule ByensHusWeb.Router do
       pipe_through :browser
 
       live_dashboard "/dashboard", metrics: ByensHusWeb.Telemetry
+
+    end
+
+    scope "/", ByensHusWeb do
+      pipe_through :browser
+
+      get "/become_admin", AdminController, :become_admin
     end
   end
 
