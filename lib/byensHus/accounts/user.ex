@@ -1,4 +1,5 @@
 defmodule ByensHus.Accounts.User do
+  alias ByensHus.Repo
   use Ecto.Schema
   import Ecto.Changeset
   import Bitwise
@@ -176,5 +177,17 @@ defmodule ByensHus.Accounts.User do
       false
     end
 
+  end
+
+  def add_role(user, role) do
+    case role do
+      :admin -> user
+        |> put_change(:roles, bor(user.roles, 2))
+        |> Repo.update()
+      :suspened ->
+        user
+        |> put_change(:roles, bor(user.roles, 4))
+        |> Repo.update()
+    end
   end
 end

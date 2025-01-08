@@ -4,11 +4,10 @@ defmodule ByensHus.Accounts do
   """
 
   import Ecto.Query, warn: false
+  require Logger
   alias ByensHus.Repo
 
   alias ByensHus.Accounts.{User, UserToken, Posts}
-
-
 
   def get_user_count() do
     length(Repo.all(User))
@@ -22,6 +21,7 @@ defmodule ByensHus.Accounts do
     {:ok, query} = UserToken.get_valid_tokens_query()
     length(Repo.all(query))
   end
+
   ## Database getters
 
   @doc """
@@ -171,7 +171,6 @@ defmodule ByensHus.Accounts do
     |> Ecto.Multi.delete_all(:tokens, UserToken.by_user_and_contexts_query(user, [context]))
   end
 
-
   @doc """
   Returns an `%Ecto.Changeset{}` for changing the user password.
 
@@ -240,8 +239,6 @@ defmodule ByensHus.Accounts do
     :ok
   end
 
-
-
   @doc """
   Gets the user by reset password token.
 
@@ -284,5 +281,35 @@ defmodule ByensHus.Accounts do
       {:ok, %{user: user}} -> {:ok, user}
       {:error, :user, changeset, _} -> {:error, changeset}
     end
+  end
+
+  def add_role(user, role) do
+    user
+    |> User.add_role(role)
+    |> Repo.update()
+  end
+
+  def get_role_list(%User{roles: roles}) do
+    role_bits = [
+      {1, :user},
+      {2, :admin},
+      {4, :suspended}
+    ]
+
+    Enum.reduce(role_bits, MapSet.new(), fn {bit, role}, acc ->
+      if Bitwise.band(roles, bit) == bit do
+        Logger.debug(to_string(role))
+        MapSet.put(acc, role)
+      else
+        acc
+      end
+    end)
+  end
+
+  @spec suspend_user(%ByensHus.Accounts.User{}) :: {:ok, %ByensHus.Accounts.User{}} | {:error, %Ecto.Changeset{}}
+  def suspend_user(user) do
+    user
+    |> User.add_role(:suspended)
+    |> Repo.update()
   end
 end
