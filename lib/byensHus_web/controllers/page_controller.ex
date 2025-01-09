@@ -4,6 +4,13 @@ defmodule ByensHusWeb.PageController do
   def home(conn, _params) do
     # The home page is often custom made,
     # so skip the default app layout.
-    render(conn, :home)
+    event = ByensHus.Events.get_events()
+    conn
+    |> render(:home, events: event)
+  end
+
+  def booking(conn, _params) do
+    conn
+    |> render(:booking)
   end
 end
