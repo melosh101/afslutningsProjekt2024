@@ -37,7 +37,7 @@ Repo.insert_all(ByensHus.Accounts.Posts, [
     title: "Post 1",
     content: "Content of post 1",
     user_id: 1,
-    event_id: ev2.id,
+    event_id: ev1.id,
     published_at: DateTime.utc_now(:second)
   },
   %{
